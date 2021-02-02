@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ysoMIcaKuqCzqjJpVHU5uQFjP1mKe1FLS62jKFiv1/6H5nka5Qo8ngeU+SC7mI+6JgpI03itD2N7zV4oBx7oIg==",
+  "dgSpecHash": "BIkqEa9laAtOaxYIm1butt3FGQvLeTDe0XhJ9VWgT/CccWcMF6eG3LErsVxu6YLR1pK4+RaCXydSnnWAMq/UEQ==",
   "success": true,
-  "projectFilePath": "D:\\GitLab\\NCUHCILAB\\DigitalScript\\DigitalScript\\DigitalScript.csproj",
+  "projectFilePath": "D:\\GitLab\\NCUHCILAB\\WinterHomework\\DigitalScript\\DigitalScript\\DigitalScript.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\azrae\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\azrae\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",

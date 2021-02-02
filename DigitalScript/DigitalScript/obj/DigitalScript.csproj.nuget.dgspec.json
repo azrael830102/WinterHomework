@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitLab\\NCUHCILAB\\DigitalScript\\DigitalScript\\DigitalScript.csproj": {}
+    "D:\\GitLab\\NCUHCILAB\\WinterHomework\\DigitalScript\\DigitalScript\\DigitalScript.csproj": {}
   },
   "projects": {
-    "D:\\GitLab\\NCUHCILAB\\DigitalScript\\DigitalScript\\DigitalScript.csproj": {
+    "D:\\GitLab\\NCUHCILAB\\WinterHomework\\DigitalScript\\DigitalScript\\DigitalScript.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitLab\\NCUHCILAB\\DigitalScript\\DigitalScript\\DigitalScript.csproj",
+        "projectUniqueName": "D:\\GitLab\\NCUHCILAB\\WinterHomework\\DigitalScript\\DigitalScript\\DigitalScript.csproj",
         "projectName": "DigitalScript",
-        "projectPath": "D:\\GitLab\\NCUHCILAB\\DigitalScript\\DigitalScript\\DigitalScript.csproj",
+        "projectPath": "D:\\GitLab\\NCUHCILAB\\WinterHomework\\DigitalScript\\DigitalScript\\DigitalScript.csproj",
         "packagesPath": "C:\\Users\\azrae\\.nuget\\packages\\",
-        "outputPath": "D:\\GitLab\\NCUHCILAB\\DigitalScript\\DigitalScript\\obj\\",
+        "outputPath": "D:\\GitLab\\NCUHCILAB\\WinterHomework\\DigitalScript\\DigitalScript\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\azrae\\AppData\\Roaming\\NuGet\\NuGet.Config",

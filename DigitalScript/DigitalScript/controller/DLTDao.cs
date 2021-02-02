@@ -145,11 +145,11 @@ namespace DigitalScript
             return DBTools.Query(sql);
         }
 
-       /* static void Main(string[] args)
+        static void Main(string[] args)
         {
             List<Dictionary<string, object>> lst = GetFilms();
 
             Console.WriteLine();
-        }*/
+        }
     }
 }
