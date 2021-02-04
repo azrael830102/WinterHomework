@@ -1,4 +1,7 @@
-﻿namespace DigitalScript
+﻿using System;
+using System.Collections.Generic;
+
+namespace DigitalScript
 {
     public enum MaterialType
     {
@@ -37,4 +40,53 @@
             }
         }
     }
+
+    class Script
+    {
+        public int id;
+        public string title;
+
+        public List<Actor> Actors { get; set; }
+        public List<Scene> Scenes { get; set; }
+        public List<Emotion> Emotions { get; set; }
+    }
+
+    class Scene
+    {
+        public int id;
+        public int background_id;
+
+        public List<Actor> Actors { get; set; }
+        public List<Emotion> Emotions { get; set; }
+        public List<Line> Lines { get; set; }
+    }
+
+    class Actor
+    {
+        public Guid id;  //UID
+        public string name;
+
+        public List<Clothing> Clothes { get; set; }
+    }
+
+    class Emotion
+    {
+
+    }
+
+    class Foreground
+    {
+
+    }
+    
+    class Line
+    {
+
+    }
+
+    class Clothing
+    {
+
+    }
+
 }

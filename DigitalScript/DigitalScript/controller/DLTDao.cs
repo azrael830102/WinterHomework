@@ -145,6 +145,29 @@ namespace DigitalScript
             return DBTools.Query(sql);
         }
 
+
+
+        public static Script GetScript(string id)
+        {
+            Script result = new Script();
+            //...
+            return result;
+        }
+
+        public static Scene GetScene(string id)
+        {
+            Scene result = new Scene();
+            //...
+            return result;
+        }
+
+        public static Actor GetActor(Guid id) 
+        {
+            Actor result = new Actor();
+            //...
+            return result; 
+        }
+
         static void Main(string[] args)
         {
             List<Dictionary<string, object>> lst = GetFilms();
