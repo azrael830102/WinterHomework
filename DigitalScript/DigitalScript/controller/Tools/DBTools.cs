@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace DigitalScript
 {
@@ -13,13 +14,13 @@ namespace DigitalScript
         /// get db connection
         /// </summary>
         /// <returns></returns>
-        static MySqlConnection GetConnection()
+        public static MySqlConnection GetConnection()
         {
             DBConfig db_config = new DBConfig(); // read config file
-            string connectStr = "server=" + db_config.server + 
-                                ";port=" + db_config.port + 
-                                ";user=" + db_config.user + 
-                                ";password=" + db_config.password + 
+            string connectStr = "server=" + db_config.server +
+                                ";port=" + db_config.port +
+                                ";user=" + db_config.user +
+                                ";password=" + db_config.password +
                                 ";database=" + db_config.db_name + ";";
             return new MySqlConnection(connectStr);
         }
@@ -50,22 +51,20 @@ namespace DigitalScript
         /// </summary>
         /// <param name="sql">select command</param>
         /// <returns> jason format string </returns>
-        public static List<Dictionary<string, object>> Query(string sql)
+        public static List<Dictionary<string, object>> Query(string sql, MySqlConnection conn)
         {
-            MySqlConnection conn = GetConnection();
             try
             {
-                conn.Open();
+                if (conn.State != ConnectionState.Open)
+                {
+                    conn.Open();
+                }
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 return DataReaderToList(cmd.ExecuteReader());
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                conn.Close();
             }
             return null;
         }
@@ -76,12 +75,14 @@ namespace DigitalScript
         /// </summary>
         /// <param name="sql"> I/D/U sql command</param>
         /// <returns> 0 : fail ; 1 : success </returns>
-        public static int Insert_Delete_Update(string sql)
+        public static int Insert_Delete_Update(string sql, MySqlConnection conn)
         {
-            MySqlConnection conn = GetConnection();
             try
             {
-                conn.Open();
+                if (conn.State != ConnectionState.Open)
+                {
+                    conn.Open();
+                }
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 return cmd.ExecuteNonQuery();
@@ -90,21 +91,17 @@ namespace DigitalScript
             {
                 Console.WriteLine(ex.Message);
             }
-            finally
-            {
-                conn.Close();
-            }
             return 0;
         }
 
-      /*  static void Main(string[] args)
-        {
-            string sql = "SELECT * FROM clothes";
-            List<Dictionary<string, object>> lst = Query(sql);
+        /*  static void Main(string[] args)
+          {
+              string sql = "SELECT * FROM clothes";
+              List<Dictionary<string, object>> lst = Query(sql);
 
 
 
-            Console.WriteLine();
-        }*/
+              Console.WriteLine();
+          }*/
     }
 }

@@ -6,5 +6,9 @@ namespace DigitalScript.model
 {
     class Actor
     {
+        public Guid id;  //UID
+        public string name;
+
+        public List<Clothing> Clothes { get; set; }
     }
 }
