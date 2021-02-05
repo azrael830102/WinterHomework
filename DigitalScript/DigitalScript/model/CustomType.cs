@@ -46,9 +46,9 @@ namespace DigitalScript
         public int id;
         public string title;
 
-        public List<Actor> Actors { get; set; }
-        public List<Scene> Scenes { get; set; }
-        public List<Emotion> Emotions { get; set; }
+        public List<Actor> Actors { get; set; }      //用逗號分隔的字串
+        public List<Scene> Scenes { get; set; }      //用逗號分隔的字串
+        public List<Emotion> Emotions { get; set; }  //拉emotion那張表的所有表情
     }
 
     class Scene
@@ -56,17 +56,18 @@ namespace DigitalScript
         public int id;
         public int background_id;
 
-        public List<Actor> Actors { get; set; }
-        public List<Emotion> Emotions { get; set; }
-        public List<Line> Lines { get; set; }
+        public List<Actor> Actors { get; set; }           //用逗號分隔的字串
+        public List<Foreground> Foregrounds { get; set; } //用逗號分隔的字串
+        public List<Line> Lines { get; set; }             //用逗號分隔的字串
     }
 
-    class Actor
+    class Actor //演員這張表還沒出來
     {
         public Guid id;  //UID
         public string name;
 
-        public List<Clothing> Clothes { get; set; }
+        public List<Clothing> Clothes { get; set; }  //controller裡的getClothes要另外寫一個function去call
+                                                     //用逗號分隔的字串
     }
 
     class Emotion
@@ -83,10 +84,11 @@ namespace DigitalScript
     {
 
     }
-
+    
     class Clothing
     {
 
     }
+    
 
 }
