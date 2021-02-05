@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DigitalScript.model;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
@@ -177,7 +178,31 @@ namespace DigitalScript
         public Script GetScript(string id)
         {
             Script result = new Script();
-            //...
+            string sql = "SELECT * FROM films WHERE id = " + id;
+            List<Dictionary<string, object>> lst = DBTools.Query(sql, conn);
+            foreach (Dictionary<string, object> item in lst)
+            {
+                result.id = (int)item["id"];
+                result.title = (string)item["name"];
+            }
+            sql = "SELECT * FROM class_member";  //所以actor的id是要另外生一個，還是從資料表中抓id????
+            lst = DBTools.Query(sql, conn);
+            foreach (Dictionary<string, object> item in lst)
+            {
+                //Actor actor = new Actor();
+
+                //actor = item["classMember_id"]; 
+            }
+            sql = "SELECT scene_id FROM film_scenesorder WHERE film_id = " + id;
+            lst = DBTools.Query(sql, conn);
+            foreach (Dictionary<string, object> item in lst)
+            {
+
+                Scene scene = new Scene();
+                scene.id = (int)item["scene_id"];
+
+            }
+
             return result;
         }
 
