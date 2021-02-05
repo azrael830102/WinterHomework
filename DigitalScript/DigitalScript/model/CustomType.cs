@@ -40,25 +40,4 @@ namespace DigitalScript
             }
         }
     }
-
-    class Emotion
-    {
-
-    }
-
-    class Foreground
-    {
-
-    }
-    
-    class Line
-    {
-
-    }
-
-    class Clothing
-    {
-
-    }
-
 }

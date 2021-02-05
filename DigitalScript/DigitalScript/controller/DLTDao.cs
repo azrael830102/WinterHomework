@@ -173,52 +173,128 @@ namespace DigitalScript
             return DBTools.Query(sql, conn);
         }
 
-
-
+        /// <summary>
+        /// Get script with script id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Script GetScript(string id)
         {
-            Script result = new Script();
+            Script script = new Script();
+            string[] id_list; //id list of actors/scenes.
+
             string sql = "SELECT * FROM films WHERE id = " + id;
-            List<Dictionary<string, object>> lst = DBTools.Query(sql, conn);
-            foreach (Dictionary<string, object> item in lst)
-            {
-                result.id = (int)item["id"];
-                result.title = (string)item["name"];
-            }
-            sql = "SELECT * FROM class_member";  //所以actor的id是要另外生一個，還是從資料表中抓id????
-            lst = DBTools.Query(sql, conn);
-            foreach (Dictionary<string, object> item in lst)
-            {
-                //Actor actor = new Actor();
+            List<Dictionary<string, object>> lst = DBTools.Query(sql, conn);            
+            Dictionary<string, object> item = lst[0];
 
-                //actor = item["classMember_id"]; 
-            }
-            sql = "SELECT scene_id FROM film_scenesorder WHERE film_id = " + id;
-            lst = DBTools.Query(sql, conn);
-            foreach (Dictionary<string, object> item in lst)
-            {
+            script.SetId(Int16.Parse(id));
+            script.SetTitle((string)item["name"]);
+            string tmp = (string)item["actors_list"];  // Column 'actors_list' not existed.
+            string tmp2 = (string)item["scenes_list"]; // Column 'scenes_list' not existed.
+            id_list = tmp.Split(',');    
+            script.SetActorList(GetActor(id_list));
+            id_list = tmp2.Split(',');
+            script.SetSceneList(GetScene(id_list));
+            script.SetEmotionList(GetEmotion()); // Get all emotions here.
 
+            return script;
+        }
+
+        /// <summary>
+        /// Get scenes with scene id list
+        /// </summary>
+        /// <param name="id_list"></param>
+        /// <returns></returns>
+        public List<Scene> GetScene(string[] id_list)
+        { 
+            List<Scene> scenes = new List<Scene>();
+            string[] id_list2; // id list of actors/foregrounds/lines.
+
+            foreach (string id in id_list)
+            {
                 Scene scene = new Scene();
-                scene.id = (int)item["scene_id"];
 
+                string sql = "SELECT * FROM scenes WHERE id = " + id;   
+                List<Dictionary<string, object>> lst = DBTools.Query(sql, conn);
+                Dictionary<string, object> item = lst[0];
+
+                scene.SetId(Int16.Parse(id));
+                scene.SetbackgroundId((int)item["background_id"]);
+                string tmp = (string)item["actors_list"];          // Column 'actors_list' not existed.
+                string tmp2 = (string)item["foregrounds_list"];    // Column 'foregrounds_list' not existed.
+                string tmp3 = (string)item["lines_list"];          // Column 'lines_list' not existed.                    
+                id_list2 = tmp.Split(',');
+                scene.SetActorList(GetActor(id_list2));
+                id_list2 = tmp2.Split(',');
+                scene.SetForegroundList(GetForeground(id_list2));
+                id_list2 = tmp3.Split(',');
+                scene.SetLineList(GetLine(id_list2));
+
+                scenes.Add(scene);                          
             }
 
-            return result;
+            return scenes;
         }
 
-        public Scene GetScene(string id)
-        {
-            Scene result = new Scene();
-            //...
-            return result;
+        /// <summary>
+        /// Get actors with actor id list
+        /// </summary>
+        /// <param name="id_list"></param>
+        /// <returns></returns>
+        public List<Actor> GetActor(string[] id_list)
+        {   
+            List<Actor> actors = new List<Actor>();
+            string[] id_list2; // id list of clothes.
+                       
+            foreach (string id in id_list)
+            {
+                Actor actor = new Actor();
+
+                string sql = "SELECT * FROM actors WHERE id = " + id;  // Table 'actors' not existed. 
+                List<Dictionary<string, object>> lst = DBTools.Query(sql, conn);
+                Dictionary<string, object> item = lst[0];
+                
+                actor.SetId(id); 
+                actor.SetName((string)item["name"]);
+                string tmp = (string)item["clothes_list"];
+                id_list2 = tmp.Split(',');
+                actor.SetClothingList(GetClothing(id_list2));
+
+                actors.Add(actor);
+            }
+
+            return actors;
         }
 
-        public Actor GetActor(Guid id)
-        {
-            Actor result = new Actor();
+        public List<Clothing> GetClothing(string[] id_list)
+        {               
+            List<Clothing> clothes = new List<Clothing>();
             //...
-            return result;
+            return clothes;          
         }
+
+        public List<Foreground> GetForeground(string[] id_list)
+        {
+            List<Foreground> foregrounds = new List<Foreground>();
+            //...
+            return foregrounds;
+        }
+
+        public List<Line> GetLine(string[] id_list)
+        {
+            List<Line> lines = new List<Line>();
+            //...
+            return lines;
+        }
+        
+        //Get all emotions.
+        public List<Emotion> GetEmotion() 
+        {
+            List<Emotion> emotions = new List<Emotion>();
+            //...
+            return emotions;
+        }
+
 
         /// <summary>
         /// Get clothes with clothes_Id
@@ -272,11 +348,13 @@ namespace DigitalScript
             return background;
         }
 
-        /*static void Main(string[] args)
+        /*
+        static void Main(string[] args)
         {
             List<Dictionary<string, object>> lst = GetFilms();
 
             Console.WriteLine();
-        }*/
+        }
+        */
     }
 }
