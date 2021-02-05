@@ -195,6 +195,58 @@ namespace DigitalScript
             return result;
         }
 
+        /// <summary>
+        /// Get clothes with clothes_Id
+        /// </summary>
+        /// <param name="clothes_Id"></param>
+        /// <returns></returns>
+        public model.Clothes GetClothes(string clothes_Id)
+        {
+            model.Clothes clothes = new model.Clothes();   
+            string sql = "SELECT * FROM costume WHERE id = '" + clothes_Id + "'";
+            List<Dictionary<string, object>> result = DBTools.Query(sql, conn);
+
+            if (result != null)
+            {
+                foreach (Dictionary<string, object> res in result)
+                {
+                    clothes.id = Convert.ToInt32(res["id"]);
+                    clothes.imgPath = Convert.ToString(res["file_path"]);
+                    // clothes.index = Convert.ToInt32(res["index"]); // the column is not exist
+                    // clothes.ratio = Convert.ToSingle(res["ratio"]); // the column is not exist
+                }
+            }
+
+            return clothes;
+        }
+
+        /// <summary>
+        /// Get background with bg_Id
+        /// </summary>
+        /// <param name="bg_Id"></param>
+        /// <returns></returns>
+        public model.Background GetBackground(string bg_Id)
+        {
+            model.Background background = new model.Background();
+            string sql = "SELECT * FROM backgrounds WHERE id = '" + bg_Id + "'";
+            List<Dictionary<string, object>> result = DBTools.Query(sql, conn);
+
+            if (result != null)
+            {
+                foreach (Dictionary<string, object> res in result)
+                {
+                    background.id = Convert.ToInt32(res["id"]);
+                    background.imgPath = Convert.ToString(res["name"]);
+                }
+            }
+
+            background.x = 0;
+            background.y = 0;
+            background.rotation = 0;
+
+            return background;
+        }
+
         /*static void Main(string[] args)
         {
             List<Dictionary<string, object>> lst = GetFilms();
