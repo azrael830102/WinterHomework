@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace DigitalScript.model
 {
@@ -11,6 +9,16 @@ namespace DigitalScript.model
         private List<Actor> actorLst;
         private List<Foreground> foregroundLst;
         private List<Line> lineLst;
+
+        public Scene()
+        {
+
+        }
+
+        public Scene(string id, Dictionary<string, object> resultSet)
+        {
+
+        }
 
         public void SetId(int id)
         {
