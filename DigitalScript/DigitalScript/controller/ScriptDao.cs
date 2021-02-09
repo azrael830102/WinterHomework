@@ -16,7 +16,7 @@ namespace DigitalScript.controller
         {
             Script script = new Script();
 
-            string sql = "SELECT * FROM films WHERE id = " + id;
+            string sql = "SELECT * FROM films WHERE id = '" + id + "'";
             List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
             Dictionary<string, object> item = lst[0];
 
@@ -24,7 +24,7 @@ namespace DigitalScript.controller
             script.SetTitle(Convert.ToString(item["name"]));
             script.SetActorList(GetActor(Convert.ToString(item["actors_list"]).Split(','))); // Column 'actors_list' not existed.
             script.SetSceneList(GetScene(Convert.ToString(item["scenes_list"]).Split(','))); // Column 'scenes_list' not existed.
-            script.SetEmotionList(GetEmotion()); // Get all emotions here.
+            script.SetEmotionList(GetEmotion());
 
             return script;
         }
@@ -37,16 +37,22 @@ namespace DigitalScript.controller
         public List<Scene> GetScene(string[] id_list)
         {
             List<Scene> scenes = new List<Scene>();
-
+            
+            string cmd_id_list = "";
             foreach (string id in id_list)
             {
+                cmd_id_list += "'" + id + "',"; 
+            }
+            cmd_id_list = cmd_id_list.Remove(cmd_id_list.Length-1, 1);
+
+            string sql = "SELECT * FROM scenes WHERE id IN (" + cmd_id_list + ")";
+            List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
+            
+            foreach (Dictionary<string, object> item in lst)
+            {
                 Scene scene = new Scene();
-
-                string sql = "SELECT * FROM scenes WHERE id = " + id;
-                List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
-                Dictionary<string, object> item = lst[0];
-
-                scene.SetId(Convert.ToInt16(id));
+                
+                scene.SetId(Convert.ToInt16(item["id"]));
                 scene.SetbackgroundId(Convert.ToInt16(item["background_id"]));
                 scene.SetActorList(GetActor(Convert.ToString(item["actors_list"]).Split(','))); // Column 'actors_list' not existed.
                 scene.SetForegroundList(GetForeground(Convert.ToString(item["foregrounds_list"]).Split(','))); // Column 'foregrounds_list' not existed.
@@ -54,6 +60,7 @@ namespace DigitalScript.controller
 
                 scenes.Add(scene);
             }
+
             return scenes;
         }
 
@@ -66,15 +73,21 @@ namespace DigitalScript.controller
         {
             List<Actor> actors = new List<Actor>();
 
+            string cmd_id_list = "";
             foreach (string id in id_list)
+            {
+                cmd_id_list += "'" + id + "',";
+            }
+            cmd_id_list = cmd_id_list.Remove(cmd_id_list.Length - 1, 1);
+                       
+            string sql = "SELECT * FROM actors WHERE id IN (" + cmd_id_list + ")";  // Table 'actors' not existed. 
+            List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());    
+            
+            foreach (Dictionary<string, object> item in lst)
             {
                 Actor actor = new Actor();
 
-                string sql = "SELECT * FROM actors WHERE id = " + id;  // Table 'actors' not existed. 
-                List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
-                Dictionary<string, object> item = lst[0];
-
-                actor.SetId(id);
+                actor.SetId(Convert.ToString(item["id"]));
                 actor.SetName((string)item["name"]);
                 actor.SetClothingList(GetClothing(Convert.ToString(item["clothes_list"]).Split(',')));
 
@@ -84,32 +97,88 @@ namespace DigitalScript.controller
             return actors;
         }
 
-        public List<Clothing> GetClothing(string[] id_list)
+        /// <summary>
+        /// Get clothes with clothing id list
+        /// </summary>
+        /// <param name="id_list"></param>
+        /// <returns></returns>
+        public List<Clothes> GetClothing(string[] id_list)
         {
-            List<Clothing> clothes = new List<Clothing>();
-            //...
+            List<Clothes> clothes = new List<Clothes>();
+
+            foreach (string id in id_list)
+            {
+                Clothes clothing = GetClothes(id);
+                clothes.Add(clothing);
+            }
+
             return clothes;
         }
 
+        /// <summary>
+        /// Get foregounds with foreground id list
+        /// </summary>
+        /// <param name="id_list"></param>
+        /// <returns></returns>
         public List<Foreground> GetForeground(string[] id_list)
         {
             List<Foreground> foregrounds = new List<Foreground>();
-            //...
+
+            foreach (string id in id_list)
+            {
+                Foreground foregound = GetForeground(id);
+                foregrounds.Add(foregound);
+            }
+
             return foregrounds;
         }
 
+        /// <summary>
+        /// Get lines with line id list
+        /// </summary>
+        /// <param name="id_list"></param>
+        /// <returns></returns>
         public List<Line> GetLine(string[] id_list)
         {
             List<Line> lines = new List<Line>();
-            //...
+
+            foreach (string id in id_list)
+            {                
+               Line line = GetLine(id);
+               lines.Add(line);
+            }
+
             return lines;
         }
 
-        //Get all emotions.
+        /// <summary>
+        /// Get all emotions
+        /// </summary>
+        /// <returns></returns>
         public List<Emotion> GetEmotion()
         {
             List<Emotion> emotions = new List<Emotion>();
-            //...
+
+            string sql = "SELECT * FROM emotion";
+            List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
+
+            if (lst != null)
+            {
+                foreach (Dictionary<string, object> item in lst)
+                {
+                    Emotion emotion = new Emotion();
+
+                    emotion.id = Convert.ToInt16(item["id"]);
+                    emotion.type = Convert.ToString(item["emotion_type"]);
+                    emotion.x = 0;
+                    emotion.y = 0;
+                    emotion.rotation = 0;
+                    emotion.imgPath = null;
+
+                    emotions.Add(emotion);
+                }
+            }
+
             return emotions;
         }
 

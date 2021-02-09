@@ -6,7 +6,7 @@ namespace DigitalScript.model
     {   
         private string id;      //UID
         private string name;
-        private List<Clothing> clothingLst;
+        private List<Clothes> clothingLst;
 
         public void SetId(string id)
         {
@@ -18,7 +18,7 @@ namespace DigitalScript.model
             this.name = name;
         }
 
-        public void SetClothingList(List<Clothing> clothingLst)
+        public void SetClothingList(List<Clothes> clothingLst)
         {
             this.clothingLst = clothingLst;
         }
@@ -33,7 +33,7 @@ namespace DigitalScript.model
             return name;
         }
 
-        public List<Clothing> GetClothingList()
+        public List<Clothes> GetClothingList()
         {
             return clothingLst;
         }
