@@ -181,14 +181,14 @@ namespace DigitalScript.controller
             {
                 foreach (Dictionary<string, object> res in result)
                 {
-                    foreground.id = Convert.ToInt16(res["id"]);
-                    foreground.imgPath = Convert.ToString(res["name"]);
+                    foreground.SetId(Convert.ToInt16(res["id"]));
+                    foreground.SetImgPath(Convert.ToString(res["name"]));
                 }
             }
 
-            foreground.x = 0;
+            /*foreground.x = 0;
             foreground.y = 0;
-            foreground.rotation = 0;
+            foreground.rotation = 0;*/
 
             return foreground;
         }
@@ -208,15 +208,15 @@ namespace DigitalScript.controller
             {
                 foreach (Dictionary<string, object> res in result)
                 {
-                    emotion.id = Convert.ToInt16(res["id"]);
-                    emotion.type = Convert.ToString(res["emotion_type"]);
+                    emotion.SetId(Convert.ToInt16(res["id"]));
+                    emotion.SetType(Convert.ToString(res["emotion_type"]));
                 }
             }
 
-            emotion.x = 0;
+            /*emotion.x = 0;
             emotion.y = 0;
             emotion.rotation = 0;
-            emotion.imgPath = null;
+            emotion.imgPath = null;*/
 
             return emotion;
         }
@@ -236,17 +236,19 @@ namespace DigitalScript.controller
             {
                 foreach (Dictionary<string, object> res in result)
                 {
-                    line.id = Convert.ToInt16(res["id"]);
-                    line.type = Convert.ToInt16(res["type"]);
-                    line.content = Convert.ToString(res["name"]);
+                    line.SetId(Convert.ToInt16(res["id"]));
+                    line.SetType(Convert.ToInt16(res["type"]));
+                    line.SetContent(Convert.ToString(res["name"]));
 
-                    /*line.has_skeleton = Convert.ToInt16(res["has_skeleton"]);
-                    line.robot_face = Convert.ToString(res["robot_face"]);
-                    line.robot_action = Convert.ToString(res["robot_action"]);
-                    line.robot_sound = Convert.ToString(res["robot_sound"]);
-                    line.robot_isON = Convert.ToInt16(res["robot_isON"]);
-                    line.type4FileName = Convert.ToString(res["type4FileName"]);
-                    line.sentiment = Convert.ToString(res["sentiment"]);*/
+                    /*
+                    line.SetHas_skeleton(Convert.ToInt16(res["has_skeleton"]));
+                    line.SetRobot_face(Convert.ToString(res["robot_face"]));
+                    line.SetRobot_action(Convert.ToString(res["robot_action"]));
+                    line.SetRobot_sound(Convert.ToString(res["robot_sound"]));
+                    line.SetRobot_isON(Convert.ToInt16(res["robot_isON"]));
+                    line.SetType4FileName(Convert.ToString(res["type4FileName"]));
+                    line.SetSentiment(Convert.ToString(res["sentiment"]));
+                    */
 
                 }
             }
