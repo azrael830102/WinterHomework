@@ -165,5 +165,94 @@ namespace DigitalScript.controller
 
             return background;
         }
+
+        /// <summary>
+        /// Get foreground with fg_Id
+        /// </summary>
+        /// <param name="fg_Id"></param>
+        /// <returns></returns>
+        public Foreground GetForeground(string fg_Id)
+        {
+            Foreground foreground = new Foreground();
+            string sql = "SELECT * FROM foregrounds WHERE id = '" + fg_Id + "'";
+            List<Dictionary<string, object>> result = DBTools.Query(sql, base.GetConnection());
+
+            if (result != null)
+            {
+                foreach (Dictionary<string, object> res in result)
+                {
+                    foreground.id = Convert.ToInt16(res["id"]);
+                    foreground.imgPath = Convert.ToString(res["name"]);
+                }
+            }
+
+            foreground.x = 0;
+            foreground.y = 0;
+            foreground.rotation = 0;
+
+            return foreground;
+        }
+
+        /// <summary>
+        /// Get emotion with em_Id
+        /// </summary>
+        /// <param name="em_Id"></param>
+        /// <returns></returns>
+        public Emotion GetEmotion(string em_Id)
+        {
+            Emotion emotion = new Emotion();
+            string sql = "SELECT * FROM emotion WHERE id = '" + em_Id + "'";
+            List<Dictionary<string, object>> result = DBTools.Query(sql, base.GetConnection());
+
+            if (result != null)
+            {
+                foreach (Dictionary<string, object> res in result)
+                {
+                    emotion.id = Convert.ToInt16(res["id"]);
+                    emotion.type = Convert.ToString(res["emotion_type"]);
+                }
+            }
+
+            emotion.x = 0;
+            emotion.y = 0;
+            emotion.rotation = 0;
+            emotion.imgPath = null;
+
+            return emotion;
+        }
+
+        /// <summary>
+        /// Get line with line_Id
+        /// </summary>
+        /// <param name="line_Id"></param>
+        /// <returns></returns>
+        public Line GetLine(string line_Id)
+        {
+            Line line = new Line();
+            string sql = "SELECT * FROM sounds WHERE id = '" + line_Id + "'";
+            List<Dictionary<string, object>> result = DBTools.Query(sql, base.GetConnection());
+
+            if (result != null)
+            {
+                foreach (Dictionary<string, object> res in result)
+                {
+                    line.id = Convert.ToInt16(res["id"]);
+                    line.type = Convert.ToInt16(res["type"]);
+                    line.content = Convert.ToString(res["name"]);
+
+                    /*line.has_skeleton = Convert.ToInt16(res["has_skeleton"]);
+                    line.robot_face = Convert.ToString(res["robot_face"]);
+                    line.robot_action = Convert.ToString(res["robot_action"]);
+                    line.robot_sound = Convert.ToString(res["robot_sound"]);
+                    line.robot_isON = Convert.ToInt16(res["robot_isON"]);
+                    line.type4FileName = Convert.ToString(res["type4FileName"]);
+                    line.sentiment = Convert.ToString(res["sentiment"]);*/
+
+                }
+            }
+                        
+
+            return line;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace DigitalScript.model
 {
-    class Foreground
+    class Foreground : Picture
     {
+
     }
 }

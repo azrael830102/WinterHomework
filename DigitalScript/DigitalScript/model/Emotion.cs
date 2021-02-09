@@ -1,6 +1,7 @@
 ﻿namespace DigitalScript.model
 {
-    class Emotion
+    class Emotion: Picture
     {
+        string type;
     }
 }
