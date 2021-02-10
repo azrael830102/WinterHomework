@@ -7,17 +7,17 @@
             this.id = id;
         }
 
-        public void SetImgPath(int imgPath)
+        public void SetImgPath(string imgPath)
         {
             this.imgPath = imgPath;
         }
 
-        public void GetId()
+        public int GetId()
         {
             return id;
         }
 
-        public void GetImgPath()
+        public string GetImgPath()
         {
             return imgPath;
         }

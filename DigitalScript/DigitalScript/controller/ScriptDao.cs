@@ -106,9 +106,25 @@ namespace DigitalScript.controller
         {
             List<Clothes> clothes = new List<Clothes>();
 
+            string cmd_id_list = "";
             foreach (string id in id_list)
             {
-                Clothes clothing = GetClothes(id);
+                cmd_id_list += "'" + id + "',";
+            }
+            cmd_id_list = cmd_id_list.Remove(cmd_id_list.Length - 1, 1);
+
+            string sql = "SELECT * FROM costume WHERE id IN (" + cmd_id_list + ")";  
+            List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
+
+            foreach (Dictionary<string, object> item in lst)
+            {
+                Clothes clothing = new Clothes(); 
+                
+                clothes.SetId(Convert.ToInt16(item["id"]));
+                clothes.SetImgPath(Convert.ToString(item["file_path"]));
+                // clothes.SetIndex(Convert.ToInt32(item["index"])); // the column is not exist
+                // clothes.SetRatio(Convert.ToSingle(item["ratio"])); // the column is not exist
+
                 clothes.Add(clothing);
             }
 
@@ -124,10 +140,27 @@ namespace DigitalScript.controller
         {
             List<Foreground> foregrounds = new List<Foreground>();
 
+            string cmd_id_list = "";
             foreach (string id in id_list)
             {
-                Foreground foregound = GetForeground(id);
-                foregrounds.Add(foregound);
+                cmd_id_list += "'" + id + "',";
+            }
+            cmd_id_list = cmd_id_list.Remove(cmd_id_list.Length - 1, 1);
+
+            string sql = "SELECT * FROM foregrounds WHERE id IN (" + cmd_id_list + ")";
+            List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
+
+            foreach (Dictionary<string, object> item in lst)
+            {
+                Foreground foreground = new Foreground();
+
+                foreground.SetId(Convert.ToInt16(item["id"]));
+                foreground.SetImgPath(Convert.ToString(item["name"]));            
+                /*foreground.x = 0;
+                foreground.y = 0;
+                foreground.rotation = 0;*/
+
+                foregrounds.Add(foreground);
             }
 
             return foregrounds;
@@ -142,10 +175,34 @@ namespace DigitalScript.controller
         {
             List<Line> lines = new List<Line>();
 
+            string cmd_id_list = "";
             foreach (string id in id_list)
-            {                
-               Line line = GetLine(id);
-               lines.Add(line);
+            {
+                cmd_id_list += "'" + id + "',";
+            }
+            cmd_id_list = cmd_id_list.Remove(cmd_id_list.Length - 1, 1);
+
+            string sql = "SELECT * FROM sounds WHERE id IN (" + cmd_id_list + ")";
+            List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
+
+            foreach (Dictionary<string, object> item in lst)
+            {
+                Line line = new Line();
+
+                line.SetId(Convert.ToInt16(item["id"]));
+                line.SetType(Convert.ToInt16(item["type"]));
+                line.SetContent(Convert.ToString(item["name"]));
+                /*
+                line.SetHas_skeleton(Convert.ToInt16(item["has_skeleton"]));
+                line.SetRobot_face(Convert.ToString(item["robot_face"]));
+                line.SetRobot_action(Convert.ToString(item["robot_action"]));
+                line.SetRobot_sound(Convert.ToString(item["robot_sound"]));
+                line.SetRobot_isON(Convert.ToInt16(item["robot_isON"]));
+                line.SetType4FileName(Convert.ToString(item["type4FileName"]));
+                line.SetSentiment(Convert.ToString(item["sentiment"]));
+                */
+
+                lines.Add(line);
             }
 
             return lines;
@@ -168,8 +225,8 @@ namespace DigitalScript.controller
                 {
                     Emotion emotion = new Emotion();
 
-                    emotion.id = Convert.ToInt16(item["id"]);
-                    emotion.type = Convert.ToString(item["emotion_type"]);
+                    emotion.SetId(Convert.ToInt16(item["id"]));
+                    emotion.SetType(Convert.ToString(item["emotion_type"]));
                     emotion.x = 0;
                     emotion.y = 0;
                     emotion.rotation = 0;
