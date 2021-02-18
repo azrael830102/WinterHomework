@@ -94,13 +94,17 @@ namespace DigitalScript
             }
             return 0;
         }
-/*
+
         static void Main(string[] args)
         {
 
-            Console.WriteLine(00);
+            List<string> l = new List<string>();
+            l.Add("a");
+            l.Add("b");
+            l.Add("c");
+            Console.WriteLine(string.Join("','",l));
 
 
-        }*/
+        }
     }
 }

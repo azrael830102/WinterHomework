@@ -2,11 +2,13 @@
 using DigitalScript.model;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace DigitalScript.controller
 {
     class ScriptDao : DaoObject
     {
+
         /// <summary>
         /// Get script with script id
         /// </summary>
@@ -38,14 +40,14 @@ namespace DigitalScript.controller
         {
             List<Scene> scenes = new List<Scene>();
             
-            string cmd_id_list = "";
+            HashSet<String> tmpSet = new HashSet<string>();
             foreach (string id in id_list)
             {
-                cmd_id_list += "'" + id + "',"; 
+                tmpSet.Add("'" + id + "'");
             }
-            cmd_id_list = cmd_id_list.Remove(cmd_id_list.Length-1, 1);
-
-            string sql = "SELECT * FROM scenes WHERE id IN (" + cmd_id_list + ")";
+            string idlst = string.Join(",", tmpSet);
+                                 
+            string sql = "SELECT * FROM scenes WHERE id IN (" + idlst + ")";
             List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
             
             foreach (Dictionary<string, object> item in lst)
@@ -73,14 +75,8 @@ namespace DigitalScript.controller
         {
             List<Actor> actors = new List<Actor>();
 
-            string cmd_id_list = "";
-            foreach (string id in id_list)
-            {
-                cmd_id_list += "'" + id + "',";
-            }
-            cmd_id_list = cmd_id_list.Remove(cmd_id_list.Length - 1, 1);
-                       
-            string sql = "SELECT * FROM actors WHERE id IN (" + cmd_id_list + ")";  // Table 'actors' not existed. 
+            string sql = "SELECT * FROM actors WHERE id IN ('" + string.Join("','", id_list) + "')";  // Table 'actors' not existed. 
+
             List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());    
             
             foreach (Dictionary<string, object> item in lst)
@@ -106,14 +102,7 @@ namespace DigitalScript.controller
         {
             List<Clothes> clothes = new List<Clothes>();
 
-            string cmd_id_list = "";
-            foreach (string id in id_list)
-            {
-                cmd_id_list += "'" + id + "',";
-            }
-            cmd_id_list = cmd_id_list.Remove(cmd_id_list.Length - 1, 1);
-
-            string sql = "SELECT * FROM costume WHERE id IN (" + cmd_id_list + ")";  
+            string sql = "SELECT * FROM costume WHERE id IN ('" + string.Join("','", id_list) + "')";  
             List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
 
             foreach (Dictionary<string, object> item in lst)
@@ -140,14 +129,7 @@ namespace DigitalScript.controller
         {
             List<Foreground> foregrounds = new List<Foreground>();
 
-            string cmd_id_list = "";
-            foreach (string id in id_list)
-            {
-                cmd_id_list += "'" + id + "',";
-            }
-            cmd_id_list = cmd_id_list.Remove(cmd_id_list.Length - 1, 1);
-
-            string sql = "SELECT * FROM foregrounds WHERE id IN (" + cmd_id_list + ")";
+            string sql = "SELECT * FROM foregrounds WHERE id IN ('" + string.Join("','", id_list) + "')";
             List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
 
             foreach (Dictionary<string, object> item in lst)
@@ -156,9 +138,11 @@ namespace DigitalScript.controller
 
                 foreground.SetID(Convert.ToString(item["id"]));
                 foreground.SetImgPath(Convert.ToString(item["name"]));            
-                /*foreground.x = 0;
+                /*
+                foreground.x = 0;
                 foreground.y = 0;
-                foreground.rotation = 0;*/
+                foreground.rotation = 0;
+                */
 
                 foregrounds.Add(foreground);
             }
@@ -175,14 +159,8 @@ namespace DigitalScript.controller
         {
             List<Line> lines = new List<Line>();
 
-            string cmd_id_list = "";
-            foreach (string id in id_list)
-            {
-                cmd_id_list += "'" + id + "',";
-            }
-            cmd_id_list = cmd_id_list.Remove(cmd_id_list.Length - 1, 1);
-
-            string sql = "SELECT * FROM sounds WHERE id IN (" + cmd_id_list + ")";
+         
+            string sql = "SELECT * FROM sounds WHERE id IN ('" + string.Join("','", id_list) + "')";
             List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
 
             foreach (Dictionary<string, object> item in lst)
@@ -231,7 +209,8 @@ namespace DigitalScript.controller
                     /*emotion.SetX(0);
                     emotion.y = 0;
                     emotion.rotation = 0;
-                    emotion.imgPath = null;*/
+                    emotion.imgPath = null;
+                    */
 
                     emotions.Add(emotion);
                 }
