@@ -1,27 +1,19 @@
-﻿namespace DigitalScript.model
+﻿
+namespace DigitalScript.model
 {
     class Emotion: Picture
     {
-        private string type;
+        BonesType index;
 
-        public void SetId(int id)
+        public void SetIndex(BonesType index)
         {
-            this.id = id;
+            this.index = index;
         }
 
-        public void SetType(string type)
+       
+        public BonesType GetIndex()
         {
-            this.type = type;
-        }
-
-        public void GetId()
-        {
-            return id;
-        }
-
-        public int GetType()
-        {
-            return type;
+            return index;
         }
     }
 }

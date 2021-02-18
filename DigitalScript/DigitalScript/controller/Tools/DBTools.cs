@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -93,15 +94,13 @@ namespace DigitalScript
             }
             return 0;
         }
+/*
+        static void Main(string[] args)
+        {
 
-        /*  static void Main(string[] args)
-          {
-              string sql = "SELECT * FROM clothes";
-              List<Dictionary<string, object>> lst = Query(sql);
+            Console.WriteLine(00);
 
 
-
-              Console.WriteLine();
-          }*/
+        }*/
     }
 }

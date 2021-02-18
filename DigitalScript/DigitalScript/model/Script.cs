@@ -10,7 +10,7 @@ namespace DigitalScript.model
         private List<Scene> sceneLst;
         private List<Emotion> emotionLst;
 
-        public void SetId(int id)
+        public void SetID(int id)
         {
             this.id = id;
         }
@@ -35,7 +35,7 @@ namespace DigitalScript.model
             this.emotionLst = emotionLst;
         }
 
-        public int GetId()
+        public int GetID()
         {
             return id;
         }

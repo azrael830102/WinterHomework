@@ -20,7 +20,7 @@ namespace DigitalScript.controller
             List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
             Dictionary<string, object> item = lst[0];
 
-            script.SetId(Convert.ToInt16(id));
+            script.SetID(Convert.ToInt16(id));
             script.SetTitle(Convert.ToString(item["name"]));
             script.SetActorList(GetActor(Convert.ToString(item["actors_list"]).Split(','))); // Column 'actors_list' not existed.
             script.SetSceneList(GetScene(Convert.ToString(item["scenes_list"]).Split(','))); // Column 'scenes_list' not existed.
@@ -52,7 +52,7 @@ namespace DigitalScript.controller
             {
                 Scene scene = new Scene();
                 
-                scene.SetId(Convert.ToInt16(item["id"]));
+                scene.SetID(Convert.ToInt16(item["id"]));
                 scene.SetbackgroundId(Convert.ToInt16(item["background_id"]));
                 scene.SetActorList(GetActor(Convert.ToString(item["actors_list"]).Split(','))); // Column 'actors_list' not existed.
                 scene.SetForegroundList(GetForeground(Convert.ToString(item["foregrounds_list"]).Split(','))); // Column 'foregrounds_list' not existed.
@@ -87,7 +87,7 @@ namespace DigitalScript.controller
             {
                 Actor actor = new Actor();
 
-                actor.SetId(Convert.ToString(item["id"]));
+                actor.SetID(Convert.ToString(item["id"]));
                 actor.SetName((string)item["name"]);
                 actor.SetClothingList(GetClothing(Convert.ToString(item["clothes_list"]).Split(',')));
 
@@ -118,12 +118,12 @@ namespace DigitalScript.controller
 
             foreach (Dictionary<string, object> item in lst)
             {
-                Clothes clothing = new Clothes(); 
-                
-                clothes.SetId(Convert.ToInt16(item["id"]));
-                clothes.SetImgPath(Convert.ToString(item["file_path"]));
-                // clothes.SetIndex(Convert.ToInt32(item["index"])); // the column is not exist
-                // clothes.SetRatio(Convert.ToSingle(item["ratio"])); // the column is not exist
+                Clothes clothing = new Clothes();
+
+                clothing.SetID(Convert.ToString(item["id"]));
+                clothing.SetImgPath(Convert.ToString(item["file_path"]));
+                // clothing.SetIndex(Convert.ToInt32(item["index"])); // the column is not exist
+                // clothing.SetRatio(Convert.ToSingle(item["ratio"])); // the column is not exist
 
                 clothes.Add(clothing);
             }
@@ -154,7 +154,7 @@ namespace DigitalScript.controller
             {
                 Foreground foreground = new Foreground();
 
-                foreground.SetId(Convert.ToInt16(item["id"]));
+                foreground.SetID(Convert.ToString(item["id"]));
                 foreground.SetImgPath(Convert.ToString(item["name"]));            
                 /*foreground.x = 0;
                 foreground.y = 0;
@@ -190,7 +190,7 @@ namespace DigitalScript.controller
                 Line line = new Line();
 
                 line.SetId(Convert.ToInt16(item["id"]));
-                line.SetType(Convert.ToInt16(item["type"]));
+                line.SetLinesType(Convert.ToInt16(item["type"]));
                 line.SetContent(Convert.ToString(item["name"]));
                 /*
                 line.SetHas_skeleton(Convert.ToInt16(item["has_skeleton"]));
@@ -225,12 +225,13 @@ namespace DigitalScript.controller
                 {
                     Emotion emotion = new Emotion();
 
-                    emotion.SetId(Convert.ToInt16(item["id"]));
-                    emotion.SetType(Convert.ToString(item["emotion_type"]));
-                    emotion.x = 0;
+                    emotion.SetID(Convert.ToString(item["id"]));
+                    emotion.SetIndex((BonesType)Convert.ToInt16(item["emotion_type"]));
+
+                    /*emotion.SetX(0);
                     emotion.y = 0;
                     emotion.rotation = 0;
-                    emotion.imgPath = null;
+                    emotion.imgPath = null;*/
 
                     emotions.Add(emotion);
                 }
@@ -255,8 +256,8 @@ namespace DigitalScript.controller
             {
                 foreach (Dictionary<string, object> res in result)
                 {
-                    clothes.id = Convert.ToInt16(res["id"]);
-                    clothes.imgPath = Convert.ToString(res["file_path"]);
+                    clothes.SetID(Convert.ToString(res["id"]));
+                    clothes.SetImgPath(Convert.ToString(res["file_path"]));
                     // clothes.index = Convert.ToInt32(res["index"]); // the column is not exist
                     // clothes.ratio = Convert.ToSingle(res["ratio"]); // the column is not exist
                 }
@@ -280,14 +281,14 @@ namespace DigitalScript.controller
             {
                 foreach (Dictionary<string, object> res in result)
                 {
-                    background.id = Convert.ToInt16(res["id"]);
-                    background.imgPath = Convert.ToString(res["name"]);
+                    background.SetID(Convert.ToString(res["id"]));
+                    background.SetImgPath(Convert.ToString(res["name"]));
                 }
             }
 
-            background.x = 0;
-            background.y = 0;
-            background.rotation = 0;
+            background.SetX(0);
+            background.SetY(0);
+            background.SetRotation(0);
 
             return background;
         }
@@ -307,7 +308,7 @@ namespace DigitalScript.controller
             {
                 foreach (Dictionary<string, object> res in result)
                 {
-                    foreground.SetId(Convert.ToInt16(res["id"]));
+                    foreground.SetID(Convert.ToString(res["id"]));
                     foreground.SetImgPath(Convert.ToString(res["name"]));
                 }
             }
@@ -334,8 +335,8 @@ namespace DigitalScript.controller
             {
                 foreach (Dictionary<string, object> res in result)
                 {
-                    emotion.SetId(Convert.ToInt16(res["id"]));
-                    emotion.SetType(Convert.ToString(res["emotion_type"]));
+                    emotion.SetID(Convert.ToString(res["id"]));
+                    emotion.SetIndex((BonesType)Convert.ToInt16(res["emotion_type"]));
                 }
             }
 
@@ -363,7 +364,7 @@ namespace DigitalScript.controller
                 foreach (Dictionary<string, object> res in result)
                 {
                     line.SetId(Convert.ToInt16(res["id"]));
-                    line.SetType(Convert.ToInt16(res["type"]));
+                    line.SetLinesType(Convert.ToInt16(res["type"]));
                     line.SetContent(Convert.ToString(res["name"]));
 
                     /*

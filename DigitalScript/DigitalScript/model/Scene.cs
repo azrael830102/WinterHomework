@@ -20,7 +20,7 @@ namespace DigitalScript.model
 
         }
 
-        public void SetId(int id)
+        public void SetID(int id)
         {
             this.id = id;
         }
@@ -45,7 +45,7 @@ namespace DigitalScript.model
             this.lineLst = lineLst;
         }
 
-        public int GetId()
+        public int GetID()
         {
             return id;
         }

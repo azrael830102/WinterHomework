@@ -1,12 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace DigitalScript.model
 {
-    class Clothes : Picture
+    class Clothes: Picture
     {
-        public int index; // using BonesType // from DB
-        public float ratio; // from DB
+        BonesType index; 
+        float ratio;
+
+        public void SetIndex(BonesType index)
+        {
+            this.index = index;
+        }
+
+
+        public BonesType GetIndex()
+        {
+            return index;
+        }
+
+        public void SetRatio(float ratio)
+        {
+            this.ratio = ratio;
+        }
+
+        public float GetRatio()
+        {
+            return ratio;
+        }
     }
 }

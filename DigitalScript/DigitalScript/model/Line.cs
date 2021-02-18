@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace DigitalScript.model
 {
     class Line
     {
         private int id; // from DB
-        private int type;
+        private int linesType;
         private string content; // from DB 
 
         /*
@@ -25,9 +22,9 @@ namespace DigitalScript.model
             this.id = id;
         }
 
-        public void SetType(int type)
+        public void SetLinesType(int linesType)
         {
-            this.type = type;
+            this.linesType = linesType;
         }
 
         public void SetContent(string content)
@@ -75,12 +72,12 @@ namespace DigitalScript.model
             return id;
         }
 
-        public int GetType()
+        public int GetLinesType()
         {
-            return type;
+            return linesType;
         }
 
-        public int GetContent()
+        public string GetContent()
         {
             return content;
         }

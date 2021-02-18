@@ -8,7 +8,7 @@ namespace DigitalScript.model
         private string name;
         private List<Clothes> clothingLst;
 
-        public void SetId(string id)
+        public void SetID(string id)
         {
             this.id = id;
         }
@@ -23,7 +23,7 @@ namespace DigitalScript.model
             this.clothingLst = clothingLst;
         }
        
-        public string GetId()
+        public string GetID()
         {
             return id;
         }

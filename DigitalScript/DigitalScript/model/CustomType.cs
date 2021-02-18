@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace DigitalScript
 {
+    public enum BonesType
+    {
+
+    }
     public enum MaterialType
     {
         Bgimg,
