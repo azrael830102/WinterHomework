@@ -1,4 +1,5 @@
-﻿
+﻿using System.Drawing;
+
 namespace DigitalScript.model
 {
     abstract class Picture
@@ -8,6 +9,7 @@ namespace DigitalScript.model
         protected int y;
         protected float rotation;
         protected string imgPath; // from DB        
+        protected Image image;
 
         public void SetID(string id)
         {
@@ -57,6 +59,16 @@ namespace DigitalScript.model
         public string GetImgPath()
         {
             return imgPath;
+        }
+
+        public void SetImage()
+        {
+            this.image = Image.FromFile(imgPath);
+        }
+
+        public Image GetImage()
+        {
+            return image;
         }
     }
 }

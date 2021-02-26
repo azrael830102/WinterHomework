@@ -237,6 +237,7 @@ namespace DigitalScript.controller
                 {
                     clothes.SetID(Convert.ToString(res["id"]));
                     clothes.SetImgPath(Convert.ToString(res["file_path"]));
+                    clothes.SetImage();
                     // clothes.index = Convert.ToInt32(res["index"]); // the column is not exist
                     // clothes.ratio = Convert.ToSingle(res["ratio"]); // the column is not exist
                 }
@@ -262,6 +263,7 @@ namespace DigitalScript.controller
                 {
                     background.SetID(Convert.ToString(res["id"]));
                     background.SetImgPath(Convert.ToString(res["name"]));
+                    background.SetImage();
                 }
             }
 
