@@ -206,10 +206,12 @@ namespace DigitalScript.controller
                     emotion.SetID(Convert.ToString(item["id"]));
                     emotion.SetIndex((BonesType)Convert.ToInt16(item["emotion_type"]));
 
+
                     /*emotion.SetX(0);
                     emotion.y = 0;
                     emotion.rotation = 0;
                     emotion.imgPath = null;
+                     emotion.SetImage();
                     */
 
                     emotions.Add(emotion);
@@ -291,6 +293,7 @@ namespace DigitalScript.controller
                 {
                     foreground.SetID(Convert.ToString(res["id"]));
                     foreground.SetImgPath(Convert.ToString(res["name"]));
+                    foreground.SetImage();
                 }
             }
 
@@ -318,6 +321,7 @@ namespace DigitalScript.controller
                 {
                     emotion.SetID(Convert.ToString(res["id"]));
                     emotion.SetIndex((BonesType)Convert.ToInt16(res["emotion_type"]));
+                    emotion.SetImage();
                 }
             }
 
