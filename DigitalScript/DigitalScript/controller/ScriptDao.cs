@@ -111,6 +111,7 @@ namespace DigitalScript.controller
 
                 clothing.SetID(Convert.ToString(item["id"]));
                 clothing.SetImgPath(Convert.ToString(item["file_path"]));
+                clothing.SetImage();
                 // clothing.SetIndex(Convert.ToInt32(item["index"])); // the column is not exist
                 // clothing.SetRatio(Convert.ToSingle(item["ratio"])); // the column is not exist
 
@@ -137,7 +138,8 @@ namespace DigitalScript.controller
                 Foreground foreground = new Foreground();
 
                 foreground.SetID(Convert.ToString(item["id"]));
-                foreground.SetImgPath(Convert.ToString(item["name"]));            
+                foreground.SetImgPath(Convert.ToString(item["name"]));
+                foreground.SetImage();
                 /*
                 foreground.x = 0;
                 foreground.y = 0;
@@ -158,7 +160,6 @@ namespace DigitalScript.controller
         public List<Line> GetLine(string[] id_list)
         {
             List<Line> lines = new List<Line>();
-
          
             string sql = "SELECT * FROM sounds WHERE id IN ('" + string.Join("','", id_list) + "')";
             List<Dictionary<string, object>> lst = DBTools.Query(sql, base.GetConnection());
@@ -205,7 +206,7 @@ namespace DigitalScript.controller
 
                     emotion.SetID(Convert.ToString(item["id"]));
                     emotion.SetIndex((BonesType)Convert.ToInt16(item["emotion_type"]));
-
+                    emotion.SetImage();
 
                     /*emotion.SetX(0);
                     emotion.y = 0;
